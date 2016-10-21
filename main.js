@@ -5,3 +5,5 @@
  */
 
 
+var allepoloniex = require('./core/poloniex.js');
+allepoloniex.allePoloniex();

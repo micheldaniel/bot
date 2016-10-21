@@ -4,5 +4,9 @@
     "keywords": ["util", "functional", "server", "client", "browser"],
     "author": "michel",
     "contributors": [],
-    "dependencies": {}
+    "dependencies": {
+        "colors": "",
+        "express": "",
+        "request": ""
+    }
 }

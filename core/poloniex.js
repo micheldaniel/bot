@@ -5,7 +5,7 @@ var request = require('request');
 //laat codes
 var colorCodes = require('../scripts/colors.js');
 
-    //option
+//option
 var options = {
     url: 'https://poloniex.com/public?command=returnTicker',
     headers: {
@@ -20,14 +20,8 @@ function callback(error, response, body) {
     }
 }
 
-
-request(options, callback);
 //request
-exports.allePoloniex = function(){
+exports.allPoloniex = function(){
     request(options, callback);
     console.log(colorCodes.log()+"Alle poloniex data opgehaald.");
 };
-
-
-
-

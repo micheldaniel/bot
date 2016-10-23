@@ -1,19 +1,4 @@
-//Load color module
-var colors = require('colors');
- 
-colors.setTheme({
-  silly: 'rainbow',
-  input: 'grey',
-  verbose: 'cyan',
-  prompt: 'grey',
-  info: 'blue',
-  data: 'grey',
-  help: 'cyan',
-  warn: 'yellow',
-  debug: 'blue',
-  error: 'red'
-});
-
+//function date
 function date(){
     var date = new Date();
     
@@ -59,18 +44,7 @@ function date(){
 module.exports = {
     
     //error
-    error: function(){
-        var returnstring = date().error+"[ERROR] ".error;
-        return returnstring;
-    },  
-    //log
-    log: function(){
-        var returnstring = date().info+"[INFO] ".info;
-        return returnstring;
-    },
-    
-    warn: function(){
-        var returnstring = date().warn+"[WARN] ".warn;
-        return returnstring;
+    date: function(){
+        return date();
     }
 };

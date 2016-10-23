@@ -16,11 +16,7 @@ var options = {
 function callback(error, response, body) {
     if (!error && response.statusCode == 200) {
         
-        //
-        var person = JSON.parse(body);
-        //console.log(data);
-        var address = "BTC_ARDR"
-        console.log(person["BTC_1CR"])
+        fs.writeFile('./marktdata/poloniexAllData.json', body)
     }
 }
 

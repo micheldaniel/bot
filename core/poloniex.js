@@ -21,7 +21,7 @@ function callback(error, response, body) {
 }
 
 //request
-exports.allPoloniex = function(){
+exports.allePoloniex = function(){
     request(options, callback);
     console.log(colorCodes.log()+"Alle poloniex data opgehaald.");
 };

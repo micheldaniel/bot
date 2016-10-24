@@ -16,7 +16,23 @@ var options = {
 
 function callback(error, response, body) {
     if (!error && response.statusCode == 200) {
-        fs.writeFile("./marktdata/temp/bittrexAllData.json", body);
+        
+        //memoryDB
+        var memoryDB = [];
+        
+        //json.parse
+        var data = JSON.parse(body).result;
+        for (i=0; i < data.length; i++){
+            memoryDB.push({
+                tag: data[i].MarketName,
+                data: {
+                    bid: data[i].Bid,
+                    ask: data[i].Ask
+                }
+            });
+        }
+        
+        fs.writeFile("./marktdata/temp/bittrexAllData.json", JSON.stringify(memoryDB));
     }
 }
 
@@ -25,18 +41,4 @@ exports.alleBittrex = function(){
     request(options, callback);
     console.log(colorCodes.log()+"Alle bittrex data opgehaald.");
 };
-
-
 //fs.existsSync('/etc/file')
-/*
- *         //for loop
-        for (i = 0; i < data.length; i++) { 
-
-            //loop
-            if(data[i].MarketName == "BITCNY-BTC"){
-
-            } else {
-
-            }
-        }
- */

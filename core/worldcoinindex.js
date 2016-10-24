@@ -36,14 +36,15 @@ function callback(error, response, body) {
                 var coinTag = rawLabel.substring(0,getLength);
                 
                 //push tag
-                memoryDB.push(coinTag);
+                memoryDB.push({tag: coinTag});
             }
             
-            fs.writeFile('./marktdata/allCoinsTags.json', memoryDB, function(err){
+            //write memorydb
+            fs.writeFile('./marktdata/allCoinsTags.json', JSON.stringify(memoryDB), function(err){
                 if (err){
                     console.log(colorCodes.error()+"Bij worldcoinindex kan de memoryDB niet opslaan.!");
                 }else{
-                    console.log(colorCodes.info()+ "Cointag db is opgeslagen.");
+                    console.log(colorCodes.log()+ "Cointag db is opgeslagen.");
                 }
                 
             });

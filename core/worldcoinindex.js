@@ -42,7 +42,7 @@ function callback(error, response, body) {
             //write memorydb
             fs.writeFile('./marktdata/allCoinsTags.json', JSON.stringify(memoryDB), function(err){
                 if (err){
-                    console.log(colorCodes.error()+"Bij worldcoinindex kan de memoryDB niet opslaan.!");
+                    console.log(colorCodes.error()+"Bij worldcoinindex kan de memoryDB niet opslaan!");
                 }else{
                     console.log(colorCodes.log()+ "Cointag db is opgeslagen.");
                 }

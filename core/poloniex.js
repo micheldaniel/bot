@@ -16,7 +16,7 @@ var options = {
 function callback(error, response, body) {
     if (!error && response.statusCode == 200) {
         
-        fs.writeFile('./marktdata/poloniexAllData.json', body)
+        fs.writeFile('./marktdata/poloniexAllData.json', body);
     }
 }
 

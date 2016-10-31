@@ -1,12 +1,27 @@
 //load modules
+var bittrex = require('node.bittrex.api');
 var fs = require('fs');
-//load modules
 var request = require('request');
 
 //laat codes
 var colorCodes = require('../scripts/colors.js');
 
-    //option
+//keys
+var keys = JSON.parse(fs.readFileSync("./keys.json", "utf8"));
+var bittrexApiKey = keys.bittrex.apiKey;
+var bittrexSercetApi = keys.bittrex.apiSecret;
+
+
+//bittrex
+bittrex.options({
+    'apikey' : bittrexApiKey,
+    'apisecret' : bittrexSercetApi, 
+    'stream' : true,
+    'verbose' : false,
+    'cleartext' : false 
+});
+
+//option
 var options = {
     url: 'https://bittrex.com/api/v1.1/public/getmarketsummaries',
     headers: {
@@ -33,12 +48,40 @@ function callback(error, response, body) {
         }
         
         fs.writeFile("./marktdata/temp/bittrexAllData.json", JSON.stringify(memoryDB));
+        console.log(colorCodes.log()+"Alle bittrex markt data is opgehaald.");
     }
+}
+
+//requet balance
+function requestBalance(){
+    bittrex.getbalances( function( data ) {
+        var memoryBalanceDb = [];
+        
+        for (i=0; i < data.length; i++){
+            
+            memoryBalanceDb.push({
+               tag: data[i].Currency,
+               data: {
+                    Balance: data.result[i].Balance,
+                    Available: data.result[i].Available,
+                    Pending: data.result[i].Pending
+               }
+            });
+        }
+        
+        fs.writeFile('./marktdata/temp/BalanceData.json', memoryBalanceDb, function(err){
+            if(err){
+                console.log(colorCodes.error()+"Kan bittrex balance niet opslaan.");
+            } else {
+                console.log(colorCodes.log()+"Alle bittrex balance data is opgeslagen.");
+            }
+        });
+    });
 }
 
 //request
 exports.alleBittrex = function(){
     request(options, callback);
-    console.log(colorCodes.log()+"Alle bittrex data opgehaald.");
+    requestBalance();
 };
 //fs.existsSync('/etc/file')
